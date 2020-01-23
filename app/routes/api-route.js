@@ -12,9 +12,8 @@ module.exports = function(app) {
 
   // Search for Specific Character (or all characters) then provides JSON
   app.get("/api", function(req, res) {
-      console.log("here")
       db.Burger.findAll().then(function(data) {
-          console.log(data)
+          
         res.json(data);
       });
     });
@@ -24,7 +23,7 @@ module.exports = function(app) {
 
     // Take the request...
     //not reading the request value correctly
-    var burger = req.body;
+    var burger = JSON.stringify(req.body.burger).slice(1, -1);
     console.log(burger);
     // Then send it to the ORM to "save" into the DB.
     db.Burger.create(
@@ -33,10 +32,11 @@ module.exports = function(app) {
         devoured: 0
         })
         .then(function(data) {
-        console.log(data);
         res.json(data);
         res.end();
     });
 
   });
+
+  
 };

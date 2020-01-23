@@ -22,7 +22,7 @@ $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: "/api/new",
-            data: burgerName,
+            data: {burger: burgerName},
         }).then(function(data) {
             alert("making your burger!");
             location.reload();
