@@ -7,8 +7,9 @@ $(document).ready(function() {
        for (var i = 0; i < data.length; i++) {
            var id = data[i].id;
            var burger = data[i].burger_name;
+           var devoured = data[i].devoured;
            var burgerDiv = $("<div>").attr("class", "burger");
-           var burgerToSend = $(burgerDiv).append(`${id}. ${burger}`);
+           var burgerToSend = $(burgerDiv).append(`${id}. ${burger}<br>Has it been eaten: ${devoured}`);
            var devourButton = $("<button>").attr("class", "devour").text("Eat Me!");
            $("#burgerList").append(burgerToSend, devourButton);
 
