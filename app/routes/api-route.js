@@ -22,7 +22,6 @@ module.exports = function(app) {
   app.post("/api/new", function(req, res) {
 
     // Take the request...
-    //not reading the request value correctly
     var burger = JSON.stringify(req.body.burger).slice(1, -1);
     console.log(burger);
     // Then send it to the ORM to "save" into the DB.
@@ -37,6 +36,25 @@ module.exports = function(app) {
     });
 
   });
+
+  app.put("/api/update/:id", function(req, res) {
+
+    var changedBurger = req.params.id;
+    console.log(changedBurger);
+    
+
+    db.Burger.update(
+      {
+        devoured: 1
+      },
+      {
+        where: {id: changedBurger}
+      })
+      .then(function(data) {
+        console.log(res.json(data));
+        res.end();
+      });
+  })
 
   
 };
