@@ -4,6 +4,8 @@
 //==============================================================
 var express = require("express");
 const db = require('./models');
+var mysql = require('mysql');
+var connection;
 
 //Sets up express
 //==============================================================
@@ -15,6 +17,16 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        database: 'database_development'
+    });
+};
 
 //Static directory to be served
 //==============================================================
